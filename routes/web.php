@@ -21,8 +21,29 @@ Route::get('/', function () {
 // http://localhost/companies
 Route::get("/companies", [CompanyController::class, 'index'])
     ->name('companies.index');
+
+Route::get("/companies/create", [CompanyController::class, 'create'])
+    ->name('companies.create');
+
+Route::post("/companies", [CompanyController::class, 'store'])
+    ->name('companies.store');
+
+// update every data
+Route::put("/companies/{company}", [CompanyController::class, 'update'])
+    ->name('companies.update');
+
+// only update the one want to change
+/*Route::patch("/companies/{company}", [CompanyController::class, 'update'])
+    ->name('companies.update');*/
+
+
+Route::get("/companies/{company}/edit", [CompanyController::class, 'edit'])
+    ->name('companies.edit');
+
 Route::get("/companies/{company}", [CompanyController::class, 'show'])
     ->name('companies.view'); // set alias
+
+//Route::resource('/companies', CompanyController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

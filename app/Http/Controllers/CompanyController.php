@@ -27,7 +27,9 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        // TODO : Get country list from Countries table
+        // TODO : Add country to the view data for dropdown
+        return view("companies.create");
     }
 
     /**
@@ -38,7 +40,25 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name'=>['min:1','max:192','unique:companies,name'],
+            'address'=>['required'],
+            'email'=>['min:5', 'email','unique:companies,email'],
+            'country_code'=>['min:3', 'max:3',],
+        ];
+
+        $validated = $request->validate($rules);
+
+        $newCompanyData = [
+            'name'=>$validated['name'],
+            'address'=>$validated['address'],
+            'email'=>$validated['email'],
+            'country_code'=>$validated['country_code'],
+            ];
+        $newCompany = Company::create($newCompanyData);
+        return redirect()->route('companies')
+            ->with('success',"Company { $newCompany->name } created successfully.");
+                            // "" to use variable
     }
 
     /**
@@ -62,11 +82,11 @@ class CompanyController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function edit($id)
+    public function edit(Company $company)
     {
-        //
+        return view("companies.edit", compact(['company']));
     }
 
     /**
@@ -78,7 +98,26 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'name'=>['min:1','max:192','unique:companies,name'],
+            'address'=>['required'],
+            'email'=>['min:5', 'email','unique:companies,email'],
+            'country_code'=>['min:3', 'max:3',],
+        ];
+
+        $validated = $request->validate($rules);
+
+        $companyData = [
+            'name'=>$validated['name'],
+            'address'=>$validated['address'],
+            'email'=>$validated['email'],
+            'country_code'=>$validated['country_code'],
+        ];
+
+        Company::find($id)->update($companyData);
+
+        return redirect()->route('companies.index')
+            ->with('success', 'Company updated');
     }
 
     /**

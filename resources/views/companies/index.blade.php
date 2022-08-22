@@ -1,6 +1,11 @@
 <x-guest-layout>
     <h1 class="text-stone-700">Companies</h1>
-
+    <div class="my-4">
+        <a href="{{ route('companies.create') }}"
+           class="bg-stone-700 text-white m-2 p-2" >
+            Add New Company
+        </a>
+    </div>
     <ul class="bg-stone-200 list-disc">
 
 
@@ -27,7 +32,8 @@
                     class="rounded bg-stone-800 text-white p-2 mt-2 my-2 mx-1">
                         View
                 </a>
-                <a href="">
+                <a href="{{ route('companies.edit', $company->id) }}"
+                   class="rounded bg-stone-800 text-white p-2 mt-2 my-2 mx-1">
                         Edit
                 </a>
                 Delete
