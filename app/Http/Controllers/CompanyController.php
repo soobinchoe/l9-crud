@@ -99,9 +99,13 @@ class CompanyController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'name'=>['min:1','max:192','unique:companies,name'],
+            'name'=>['min:1','max:192',
+//                'unique:companies,name'
+            ],
             'address'=>['required'],
-            'email'=>['min:5', 'email','unique:companies,email'],
+            'email'=>['min:5', 'email',
+//                'unique:companies,email'
+            ],
             'country_code'=>['min:3', 'max:3',],
         ];
 
