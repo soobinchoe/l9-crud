@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,14 +37,30 @@ Route::put("/companies/{company}", [CompanyController::class, 'update'])
 /*Route::patch("/companies/{company}", [CompanyController::class, 'update'])
     ->name('companies.update');*/
 
-
 Route::get("/companies/{company}/edit", [CompanyController::class, 'edit'])
     ->name('companies.edit');
 
-Route::get("/companies/{company}", [CompanyController::class, 'show'])
-    ->name('companies.view'); // set alias
+//Route::get("/companies/{company}", [CompanyController::class, 'show'])
+//    ->name('companies.view'); // set alias
 
+Route::get("/companies/{company}/delete", [CompanyController::class, 'delete'])
+    ->name('companies.delete');
+
+Route::get("/companies/{company}", [CompanyController::class, 'destroy'])
+    ->name('companies.destroy');
+
+Route::get('/companies/{company}', [CompanyController::class, 'show'])
+    ->name('companies.view');
 //Route::resource('/companies', CompanyController::class);
+
+
+// Products Route
+Route::get("/products", [ProductController::class, 'index'])
+    ->name('products.index');
+
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
