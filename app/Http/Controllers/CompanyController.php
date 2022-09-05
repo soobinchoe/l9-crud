@@ -108,7 +108,7 @@ class CompanyController extends Controller
             'email'=>['min:5', 'email',
 //                'unique:companies,email'
             ],
-            'country_code'=>['min:3', 'max:3',],
+            'countryCode'=>['min:3', 'max:3',],
         ];
 
         $validated = $request->validate($rules);
@@ -117,13 +117,13 @@ class CompanyController extends Controller
             'name'=>$validated['name'],
             'address'=>$validated['address'],
             'email'=>$validated['email'],
-            'country_code'=>$validated['country_code'],
+            'country_code'=>$validated['countryCode'],
         ];
 
         $company = Company::find($id)->update($companyData);
 
         return redirect()->route('companies.index')
-            ->with('success', "Company { $company->name } updated");
+            ->with('success', "Company { $companyData[name] } updated");
     }
 
     /**

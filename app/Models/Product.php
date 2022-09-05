@@ -13,6 +13,6 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'company'
+        'company_id'
     ];
 }

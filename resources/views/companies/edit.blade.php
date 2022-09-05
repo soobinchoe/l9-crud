@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <h1 class="bg-stone-200 mb-6 p-2">Add New Company</h1>
+    <h1 class="bg-stone-200 mb-6 p-2">Edit New Company</h1>
     <form action="{{ route('companies.update', $company) }}"
           method="POST">
         @method('PUT')
@@ -35,7 +35,7 @@
         {{--country code--}}
         <div class="grid grid-cols-2 my-2">
             <label for="CountryCode">Country:</label>
-            <select name="countryCode" id="CountryCode"
+            <select name="countryCode" id="countryCode"
                     class="ml-2">
                 <option value="AUS" @if(old('country')=="AUS") selected @endif>Australia</option>
                 <option value="CAN" @if(old('country')=="CAN") selected @endif>Canada</option>
@@ -73,10 +73,11 @@
                         class="rounded bg-blue-700 text-white px-2 py-1 mx-2">
                     Clear
                 </button>
-                <button class="rounded bg-stone-700 text-white px-2 py-1 mx-2"
-                        id="Back">
+                <a class="rounded bg-stone-700 text-white px-2 py-1 mx-2"
+                   href="{{ route('companies.index') }}"
+                   id="Back">
                     Back
-                </button>
+                </a>
             </div>
         </div>
         <div>
